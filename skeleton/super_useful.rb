@@ -36,12 +36,19 @@ def feed_me_a_fruit
 
 end  
 
+class LessThanFiveYearsError < StandardError; end
+class EmptyError < StandardError; end
+
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
+
+    raise LessThanFiveYearsError if @yrs_known < 5
+    raise EmptyError.new("Either name or fav_pastime is empty.") if @name.length <= 0 || @fav_pastime.length <= 0
+
   end
 
   def talk_about_friendship
